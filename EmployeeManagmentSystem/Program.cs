@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Infrastructure;
+using Application.Services.Department;
+using Infrastructure.UnitOfWork;
+using Application.Services.Employee;
 
 namespace EmployeeManagmentSystem
 {
@@ -15,6 +18,10 @@ namespace EmployeeManagmentSystem
                    dbContextOptionBuilder.UseSqlServer(connectionString).LogTo(s => System.Diagnostics.Debug.WriteLine(s))
                    .EnableDetailedErrors(true).EnableSensitiveDataLogging(true);
                });
+            builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

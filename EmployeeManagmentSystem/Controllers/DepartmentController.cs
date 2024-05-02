@@ -27,5 +27,12 @@ namespace EmployeeManagementSystem.Controllers
             var result = await _departmentService.GetAllDepartments();
             return Ok(result);
         }
+        [HttpDelete]
+        [Route("Delete")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _departmentService.DeleteDepartment(id);
+            return Ok();
+        }
     }
 }

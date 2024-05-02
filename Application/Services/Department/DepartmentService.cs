@@ -25,9 +25,10 @@ namespace Application.Services.Department
             await _unitOfWork.CommitAsync();
         }
 
-        public Task DeleteDepartment()
+        public async Task DeleteDepartment(int id)
         {
-            throw new NotImplementedException();
+            await _unitOfWork.Departments.DeleteAsync(id);
+            await _unitOfWork.CommitAsync();
         }
 
         public async Task<List<DepartmentDto>> GetAllDepartments()
@@ -43,9 +44,5 @@ namespace Application.Services.Department
             }).ToList();
         }
 
-        public Task UpdateDepartment(DepartmentEntity department)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

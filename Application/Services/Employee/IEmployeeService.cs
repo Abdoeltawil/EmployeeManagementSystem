@@ -7,7 +7,8 @@ namespace Application.Services.Employee
     {
         Task<List<EmployeeDto>> GetAllEmployees();
         Task AddEmployee(AddEmployeeRequest employee);
-        Task DeleteEmployee();
+        Task DeleteEmployee(int id);
         Task UpdateEmployee(EmployeeEntity employee);
+        Task<EmployeeEntity> GetEmployeeById(int id);
     }
 }

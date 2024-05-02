@@ -29,26 +29,33 @@ namespace Application.Services.Employee
             await _unitOfWork.CommitAsync();
         }
 
-        public Task DeleteEmployee()
+        public async Task DeleteEmployee(int id)
         {
-            throw new NotImplementedException();
+            await _unitOfWork.Employees.DeleteAsync(id);
+            await _unitOfWork.CommitAsync();
         }
 
         public async Task<List<EmployeeDto>> GetAllEmployees()
         {
-            var employees = await _unitOfWork.Employees.GetAllAsync();
+            var employees = await _unitOfWork.Employees.GetAllIncludeAsync();
             return employees.Select(e => new EmployeeDto
             {
                 Id = e.Id,
-                DepartmentId=e.DepartmentId,
-                HireDate=e.HireDate,
-                IsActive=e.IsActive,
-                Mobile=e.Mobile,
-                Name=e.Name,
-                Phone=e.Phone,
-                SSN=e.SSN
+                DepartmentId = e.DepartmentId,
+                DepartmentName = e.Department.Name, 
+                HireDate = e.HireDate,
+                IsActive = e.IsActive,
+                Mobile = e.Mobile,
+                Name = e.Name,
+                Phone = e.Phone,
+                SSN = e.SSN
             }).ToList();
         }
+
+        public async Task<EmployeeEntity> GetEmployeeById(int id)
+             => await _unitOfWork.Employees.GetByIdAsync(id);
+        
+
         public async Task UpdateEmployee(EmployeeEntity employee)
         {
             var existEmployee = await _unitOfWork.Employees.GetByIdAsync(employee.Id);

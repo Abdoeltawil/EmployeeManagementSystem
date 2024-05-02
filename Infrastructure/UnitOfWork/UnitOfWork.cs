@@ -1,4 +1,5 @@
 ﻿using Domian.Entities;
+using Infrastructure.Repositories.Employee;
 using Infrastructure.Repository;
 
 namespace Infrastructure.UnitOfWork
@@ -6,13 +7,13 @@ namespace Infrastructure.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DatabaseContext _databaseContext;
-        public IBaseRepository<Employee> Employees { get; private set; }
+        public IEmployeeRepository Employees { get; private set; }
         public IBaseRepository<Department> Departments { get; private set; }
 
-        public UnitOfWork(DatabaseContext databaseContext)
+        public UnitOfWork(DatabaseContext databaseContext,IEmployeeRepository employeeRepository)
         {
             _databaseContext = databaseContext;
-            Employees = new BaseRepository<Employee>(databaseContext);
+            Employees = employeeRepository;
             Departments = new BaseRepository<Department>(databaseContext);
         }
 

@@ -3,6 +3,7 @@ using Infrastructure;
 using Application.Services.Department;
 using Infrastructure.UnitOfWork;
 using Application.Services.Employee;
+using Infrastructure.Repositories.Employee;
 
 namespace EmployeeManagmentSystem
 {
@@ -21,12 +22,13 @@ namespace EmployeeManagmentSystem
             builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddCors();
             var app = builder.Build();
             using (var scope = app.Services.CreateScope())
             {
@@ -46,7 +48,7 @@ namespace EmployeeManagmentSystem
 
             app.UseAuthorization();
 
-
+            app.UseCors(policy=> policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200/"));
             app.MapControllers();
 
             app.Run();

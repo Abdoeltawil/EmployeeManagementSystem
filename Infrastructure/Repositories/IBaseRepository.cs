@@ -8,5 +8,6 @@
         Task AddAsync(T item);
         Task<List<T>> GetAllAsync();
         Task<T?> GetByIdAsync(int id);
+        Task DeleteAsync(int id);
     }
 }

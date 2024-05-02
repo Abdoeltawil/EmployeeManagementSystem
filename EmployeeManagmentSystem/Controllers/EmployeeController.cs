@@ -21,15 +21,28 @@ namespace EmployeeManagementSystem.Controllers
             var employees = await _employeeService.GetAllEmployees();
             return Ok(employees);
         }
+        [HttpGet]
+        [Route("GetById")]
+        public async Task<IActionResult> GetById([FromQuery] int id)
+        {
+            var employee = await _employeeService.GetEmployeeById(id);
+            return employee is null ? NotFound() : Ok(employee);
+        }
 
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> Add(AddEmployeeRequest employee)
+        public async Task<IActionResult> Add([FromBody] AddEmployeeRequest employee)
         {
             await _employeeService.AddEmployee(employee);
             return Created();
         }
 
-
+        [HttpDelete]
+        [Route("Delete")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _employeeService.DeleteEmployee(id);
+            return Ok();
+        }
     }
 }

@@ -10,5 +10,6 @@
         public bool IsActive { get; set; }
         public DateTime HireDate { get; set; }
         public int DepartmentId { get; set; }
+        public string DepartmentName { get; set; }
     }
 }

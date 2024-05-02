@@ -1,0 +1,26 @@
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">SSN</th>
+      <th scope="col">Mobile</th>
+      <th scope="col">Hire Date</th>
+      <th scope="col">Action</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employeeList ">
+      <td>{{employee.id}}</td>
+      <td>{{employee.name}}</td>
+      <td>{{employee.ssn}}</td>
+      <td>{{employee.mobile }}</td>
+      <td>{{employee.hireDate }}</td>
+      <td>
+        <button type="button" class="btn btn-secondary" style="margin-right: 10px;">Edit</button>
+        <button type="button" class="btn btn-secondary">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -25,9 +25,12 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -60,6 +63,7 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+        
           "configurations": {
             "production": {
               "buildTarget": "AngularEmployeeManagmentSystem:build:production"
@@ -96,5 +100,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "7a0882cd-f194-4b32-8725-69f4a2b8842b"
   }
 }
